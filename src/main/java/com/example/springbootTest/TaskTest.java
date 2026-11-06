@@ -21,9 +21,9 @@ public class TaskTest {
         for (Task task : tasks) {
             System.out.println(task.getTitle());
         }
-        
-        //IDが10のタスクを取得
-        Task task = repository.findById(10L);
+
+        // IDが2のタスクを取得
+        Task task = repository.findById(2L);
 
         // 取得できたか確認
         if (task != null) {
@@ -32,6 +32,34 @@ public class TaskTest {
             System.out.println("タスクが見つかりません");
         }
 
-    }
+        // IDが2のタスクを更新
+        repository.updateTask(2L, "Spring Bootの勉強", true);
 
+        // 更新後のタスクを取得
+        Task updatedTask = repository.findById(2L);
+
+        // 更新結果を表示
+        System.out.println("更新後のタイトル：" + updatedTask.getTitle());
+        System.out.println("完了状態：" + updatedTask.isCompleted());
+
+        // IDが2のタスクを削除
+        repository.deleteTask(2L);
+
+        // 削除後の一覧を取得
+        List<Task> remainingTasks = repository.getTasks();
+
+        // 削除後の一覧を表示
+        System.out.println("削除後のタスク一覧");
+
+        for (Task remainingTask : remainingTasks) {
+            System.out.println(
+                remainingTask.getId() + "：" + remainingTask.getTitle()
+            );
+        }
+        
+    }
+    
+    
+    
+    
 }

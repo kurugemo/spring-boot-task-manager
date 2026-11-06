@@ -26,10 +26,36 @@ public class TaskRepository {
             if (task.getId().equals(id)) {
                 return task;
             }
+            
+            
 
         }
 
         return null;
     }
+    
+    // タスクを更新するメソッド
+    public void updateTask(Long id, String title, boolean completed) {
 
+        Task task = findById(id);
+
+        if (task != null) {
+            task.setTitle(title);
+            task.setCompleted(completed);
+        }
+
+
+    }
+    
+    // タスクを削除するメソッド
+    public void deleteTask(Long id) {
+
+        Task task = findById(id);
+
+        if (task != null) {
+            tasks.remove(task);
+        }
+
+    }
+    
 }
