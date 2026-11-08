@@ -30,4 +30,15 @@ public class TaskService {
 		
 		repository.addTask(task);
 	}
+	
+	public Task findTaskById(Long id) {
+		
+		Task task = repository.findById(id);
+		
+		if(task == null) {
+			return null;
+		}
+		
+		return task;
+	}
 }

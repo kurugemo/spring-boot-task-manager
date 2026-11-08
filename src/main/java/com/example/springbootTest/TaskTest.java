@@ -14,17 +14,14 @@ public class TaskTest {
         repository.addTask(new Task(2L, "買い物", false));
         repository.addTask(new Task(3L, "掃除", true));
 
-        repository.deleteTask(2L);
+        Task task = service.findTaskById(3L);
         
-        service.addTask("筋トレ");
+        System.out.println(task.getId() + ":" + task.getTitle() + ":" + task.isCompleted());
         
-        repository.deleteTask(4L);
-        
-        service.addTask("ランニング");
-        
-        for (Task task : repository.getTasks()) {
-            System.out.println(task.getId() + "：" + task.getTitle());
-        }
+        task = service.findTaskById(4L);
+       
+        System.out.println(task.getId() + ":" + task.getTitle() + ":" + task.isCompleted());
+
         
         
     }
