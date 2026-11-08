@@ -17,7 +17,6 @@ public class TaskService {
 		return repository.getTasks();
 	}
 	
-	//入力されたタスクのタイトルが空欄でないか確認するService
 	public void addTask(String title) {
 	
 		if(title.isBlank()) {
