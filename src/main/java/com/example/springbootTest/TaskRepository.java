@@ -2,11 +2,17 @@ package com.example.springbootTest;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
+
+@Repository
 public class TaskRepository {
+	
+	
 	
 	private List<Task> tasks = new ArrayList<>();
 	
+	private long nextId = 4L;
 	
 	//タスクを追加するメソッド
     public void addTask(Task task) {
@@ -16,6 +22,13 @@ public class TaskRepository {
     //タスクを取得して一覧表示するメソッド
     public List<Task> getTasks() {
         return tasks;
+    }
+    
+    //自動採番するメソッド
+    public Long getNextId() {
+        Long id = nextId;
+        nextId = nextId + 1;
+        return id;
     }
     
     //IDからタスクを1件取得するメソッド
@@ -55,6 +68,8 @@ public class TaskRepository {
         if (task != null) {
             tasks.remove(task);
         }
+        
+        
 
     }
     
