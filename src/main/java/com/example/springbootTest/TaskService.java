@@ -43,7 +43,18 @@ public class TaskService {
 	}
 	
 	public void updateTask(Long id, String title, boolean completed) {
+		
+		if(title.isBlank()) {
+			return;
+		}
+		
 		repository.updateTask(id, title, completed);
+	}
+	
+	public void deleteTask(Long id) {
+		
+		repository.deleteTask(id);
+		
 	}
 	
 }

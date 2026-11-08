@@ -18,15 +18,21 @@ public class TaskTest {
         
         System.out.println(task.getId() + ":" + task.getTitle() + ":" + task.isCompleted());
         
+        service.updateTask(3L, "", true);
+        
+        System.out.println(task.getId() + ":" + task.getTitle() + ":" + task.isCompleted());
+        
         service.updateTask(3L, "Spring Bootの勉強", true);
         
         System.out.println(task.getId() + ":" + task.getTitle() + ":" + task.isCompleted());
 
+        service.deleteTask(3L);
         
+        System.out.println(service.findTaskById(3L));
         
     }
     
     
-    
+    	
     
 }
