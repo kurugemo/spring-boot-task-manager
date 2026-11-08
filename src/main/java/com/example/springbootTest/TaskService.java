@@ -41,4 +41,9 @@ public class TaskService {
 		
 		return task;
 	}
+	
+	public void updateTask(Long id, String title, boolean completed) {
+		repository.updateTask(id, title, completed);
+	}
+	
 }

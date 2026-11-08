@@ -18,8 +18,8 @@ public class TaskTest {
         
         System.out.println(task.getId() + ":" + task.getTitle() + ":" + task.isCompleted());
         
-        task = service.findTaskById(4L);
-       
+        service.updateTask(3L, "Spring Bootの勉強", true);
+        
         System.out.println(task.getId() + ":" + task.getTitle() + ":" + task.isCompleted());
 
         
