@@ -34,11 +34,10 @@ public class TaskController {
 	@PostMapping("/tasks/update")
 	public String updateTask(
 			@RequestParam Long id,
+			@RequestParam String title,
 			@RequestParam boolean completed) {
 		
-		Task task = service.findTaskById(id);
-		
-		service.updateTask(id, task.getTitle(), completed);
+		service.updateTask(id, title, completed);
 		
 		return "redirect:/tasks";
 	}
