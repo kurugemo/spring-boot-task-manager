@@ -30,5 +30,25 @@ public class TaskController {
 		
 		return "redirect:/tasks";
 	}
+	
+	@PostMapping("/tasks/update")
+	public String updateTask(
+			@RequestParam Long id,
+			@RequestParam boolean completed) {
+		
+		Task task = service.findTaskById(id);
+		
+		service.updateTask(id, task.getTitle(), completed);
+		
+		return "redirect:/tasks";
+	}
 
+	@PostMapping("/tasks/delete")
+	public String deleteTask(@RequestParam Long id) {
+		
+		service.deleteTask(id);
+		
+		return "redirect:/tasks";
+		
+	}
 }
