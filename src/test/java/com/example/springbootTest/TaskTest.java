@@ -1,18 +1,23 @@
 package com.example.springbootTest;
 
-import java.util.List;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
 public class TaskTest {
 
-    public static void main(String[] args) {
+	@Autowired
+	private TaskService service;
+	
+    @Test
+    void testTaskCrud(){
 
-    	TaskRepository repository = new TaskRepository();
-    	TaskService service = new TaskService(repository);
-
+    	
         // タスクを追加
-        repository.addTask(new Task(1L, "Javaの勉強", false));
-        repository.addTask(new Task(2L, "買い物", false));
-        repository.addTask(new Task(3L, "掃除", true));
+    	service.addTask("Javaの勉強");
+    	service.addTask("買い物");
+    	service.addTask("掃除");
 
         Task task = service.findTaskById(3L);
         
@@ -23,6 +28,8 @@ public class TaskTest {
         System.out.println(task.getId() + ":" + task.getTitle() + ":" + task.isCompleted());
         
         service.updateTask(3L, "Spring Bootの勉強", true);
+        
+        task = service.findTaskById(3L);
         
         System.out.println(task.getId() + ":" + task.getTitle() + ":" + task.isCompleted());
 

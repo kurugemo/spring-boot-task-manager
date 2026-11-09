@@ -14,7 +14,7 @@ public class TaskService {
 	}
 	
 	public List<Task> getAllTasks() {
-		return repository.getTasks();
+		return repository.findAll();
 	}
 	
 	public void addTask(String title) {
@@ -23,22 +23,15 @@ public class TaskService {
 			return;
 		}
 		
-		Long nextId = repository.getNextId();
+		Task task = new Task(null, title, false);
 		
-		Task task = new Task(nextId, title, false);
-		
-		repository.addTask(task);
+		repository.save(task);
 	}
 	
 	public Task findTaskById(Long id) {
 		
-		Task task = repository.findById(id);
+		return repository.findById(id).orElse(null);
 		
-		if(task == null) {
-			return null;
-		}
-		
-		return task;
 	}
 	
 	public void updateTask(Long id, String title, boolean completed) {
@@ -47,12 +40,24 @@ public class TaskService {
 			return;
 		}
 		
-		repository.updateTask(id, title, completed);
+		Task task = repository.findById(id).orElse(null);
+		
+		if(task == null) {
+			
+			return;
+			
+		}
+		
+		task.setTitle(title);
+		task.setCompleted(completed);
+		
+		repository.save(task);
+	
 	}
 	
 	public void deleteTask(Long id) {
 		
-		repository.deleteTask(id);
+		repository.deleteById(id);
 		
 	}
 	

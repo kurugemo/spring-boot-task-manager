@@ -1,8 +1,16 @@
 package com.example.springbootTest;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
+@Entity
 public class Task {
 
     // フィールド
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String title;
     private boolean completed;
@@ -12,6 +20,11 @@ public class Task {
         this.id = id;
         this.title = title;
         this.completed = completed;
+    }
+    
+    //引数なしコンストラクタ
+    public Task() {
+    
     }
 
     
