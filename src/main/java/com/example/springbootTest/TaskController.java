@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
 
 @Controller
 public class TaskController {
@@ -24,9 +26,18 @@ public class TaskController {
 	}
 	
 	@PostMapping("/tasks")
-	public String addTask(@RequestParam String title) {
+	public String addTask(
+			@Valid Task task,
+			BindingResult result,
+			Model model) {
 				
-		service.addTask(title);
+		if(result.hasErrors()) {
+			model.addAttribute("tasks", service.getAllTasks());
+			model.addAttribute("errorMessage","タスク名を入力してください。");
+			return "tasks";
+		}
+		
+		service.addTask(task.getTitle());
 		
 		return "redirect:/tasks";
 	}
