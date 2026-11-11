@@ -45,10 +45,20 @@ public class TaskController {
 	@PostMapping("/tasks/update")
 	public String updateTask(
 			@RequestParam Long id,
-			@RequestParam String title,
-			@RequestParam boolean completed) {
+			@Valid Task task,
+			BindingResult result,
+			@RequestParam boolean completed,
+			Model model) {
 		
-		service.updateTask(id, title, completed);
+		if(result.hasErrors()) {
+			
+			model.addAttribute("tasks", service.getAllTasks());
+			model.addAttribute("errorMessage", "タスク名を入力してください。");
+			
+			return "tasks";
+		}
+		
+		service.updateTask(id, task.getTitle(), completed);
 		
 		return "redirect:/tasks";
 	}
