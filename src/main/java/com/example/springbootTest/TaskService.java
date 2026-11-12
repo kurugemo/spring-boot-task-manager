@@ -44,7 +44,7 @@ public class TaskService {
 		
 		if(task == null) {
 			
-			return;
+			throw new RuntimeException("タスクが見つかりません。");
 			
 		}
 		
