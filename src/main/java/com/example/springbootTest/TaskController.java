@@ -63,7 +63,7 @@ public class TaskController {
 		
 		    return "redirect:/tasks";
 		    
-		} catch(RuntimeException e) {
+		} catch(TaskNotFoundException e) {
 			model.addAttribute("tasks", service.getAllTasks());
 			model.addAttribute("errorMessage", e.getMessage());
 			
