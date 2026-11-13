@@ -1,13 +1,18 @@
 package com.example.springbootTest;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @Service
 public class TaskService {
 	
 	private final TaskRepository repository;
+	
+	private static final Logger logger =
+			LoggerFactory.getLogger(TaskService.class);
 
 	public TaskService(TaskRepository repository) {
 	    this.repository = repository;
@@ -20,12 +25,15 @@ public class TaskService {
 	public void addTask(String title) {
 	
 		if(title.isBlank()) {
+			logger.warn("空のタスク名が入力されました。");
 			return;
 		}
 		
 		Task task = new Task(null, title, false);
 		
 		repository.save(task);
+		
+		logger.info("タスクを追加しました。　title={}", title);
 	}
 	
 	public Task findTaskById(Long id) {

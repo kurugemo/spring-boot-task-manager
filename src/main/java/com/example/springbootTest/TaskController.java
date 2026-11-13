@@ -7,9 +7,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @Controller
 public class TaskController {
+	
+	private static final Logger logger =
+	        LoggerFactory.getLogger(TaskController.class);
 	
 	private final TaskService service;
 	
@@ -32,6 +38,7 @@ public class TaskController {
 			Model model) {
 				
 		if(result.hasErrors()) {
+			logger.warn("タスク名の入力エラーが発生しました。");
 			model.addAttribute("tasks", service.getAllTasks());
 			model.addAttribute("errorMessage","タスク名を入力してください。");
 			return "tasks";
