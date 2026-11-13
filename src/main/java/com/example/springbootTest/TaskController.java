@@ -58,17 +58,8 @@ public class TaskController {
 			return "tasks";
 		}
 		
-		try{
-			service.updateTask(id, task.getTitle(), completed);
-		
-		    return "redirect:/tasks";
-		    
-		} catch(TaskNotFoundException e) {
-			model.addAttribute("tasks", service.getAllTasks());
-			model.addAttribute("errorMessage", e.getMessage());
-			
-			return "tasks";
-		}
+		service.updateTask(id, task.getTitle(), completed);
+		return "redirect:/tasks";
 	}
 
 	@PostMapping("/tasks/delete")
