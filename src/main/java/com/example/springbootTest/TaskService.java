@@ -33,6 +33,7 @@ public class TaskService {
 		
 		repository.save(task);
 		
+		logger.debug("タスク追加処理を開始します。 title={}", title);
 		logger.info("タスクを追加しました。　title={}", title);
 	}
 	
