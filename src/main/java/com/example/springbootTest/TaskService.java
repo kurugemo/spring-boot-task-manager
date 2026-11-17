@@ -22,11 +22,11 @@ public class TaskService {
 		return repository.findAll();
 	}
 	
-	public void addTask(String title) {
+	public Long addTask(String title) {
 	
 		if(title.isBlank()) {
 			logger.warn("空のタスク名が入力されました。");
-			return;
+			return null;
 		}
 		
 		Task task = new Task(null, title, false);
@@ -35,6 +35,10 @@ public class TaskService {
 		
 		logger.debug("タスク追加処理を開始します。 title={}", title);
 		logger.info("タスクを追加しました。　title={}", title);
+		
+		return task.getId();
+		
+		
 	}
 	
 	public Task findTaskById(Long id) {
