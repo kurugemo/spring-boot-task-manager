@@ -70,6 +70,10 @@ public class TaskService {
 	
 	public void deleteTask(Long id) {
 		
+		if(id == null || !repository.existsById(id)) {
+			
+			throw new TaskNotFoundException("タスクが見つかりません。");
+		}
 		repository.deleteById(id);
 		
 	}

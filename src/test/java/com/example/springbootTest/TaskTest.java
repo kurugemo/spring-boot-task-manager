@@ -80,4 +80,13 @@ public class TaskTest {
     	
     }
     
+    @Test
+    void testDeleteTaskNotFound() {
+    	
+    	assertThrows(TaskNotFoundException.class, () -> {
+    	    service.deleteTask(999L);
+    	});
+    	
+    }
+    
 }
