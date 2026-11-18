@@ -1,5 +1,6 @@
 package com.example.springbootTest;
 
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 
@@ -28,6 +30,33 @@ public class TaskTest {
         assertNotNull(task);
         assertEquals("掃除", task.getTitle());
 
+    }
+    
+    @Test
+    void testAddTaskWithBlankTitle() {
+    	
+    	Long taskId = service.addTask("");
+    	
+    	assertNull(taskId);
+    	
+    }
+    
+    @Test
+    void testGetAllTasks() {
+        List<Task> tasks = service.getAllTasks();
+
+        assertNotNull(tasks);
+        assertFalse(tasks.isEmpty());
+        
+    }
+    
+    @Test
+    void testFindTaskByIdNotFound() {
+    	
+    	Task task = service.findTaskById(999L);
+    	
+    	assertNull(task);
+    	
     }
     
     @Test
