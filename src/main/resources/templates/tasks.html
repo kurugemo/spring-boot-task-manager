@@ -1,70 +1,75 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>タスク一覧</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>タスク一覧</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
+
 <body>
 
-    <h1>タスク一覧</h1>
-	
-	<p th:if="${errorMessage}" th:text="${errorMessage}"></p>
-	
-	<form action="/tasks" method="post">
-		
-		<input type="text" name="title"	placeholder="タスク名を入力"	>
-		
-		<button type="submit">追加</button>
-		
-	</form>
-	
-	<ul>
-	    <li th:each="task : ${tasks}">
-			
-			<!-- タイトル更新フォーム　-->
-			<form action="/tasks/update" method="post">
-							
-			   <input type="hidden" name="id" th:value="${task.id}">
-							   
-			   <input type="text"
-					  name="title"
-					  th:value="${task.title}">
-									  
-		       <input type="hidden" name="completed" th:value="${task.completed}">
-							   
-			   <button type="submit">更新</button>
-							   
-			</form>
-			
-			
-			<!--　完了チェックフォーム(チェックボックス) -->
-			<form action="/tasks/update" method="post">
-			
-		       <input type="hidden" name="id" th:value="${task.id}">
-			   
-			   <input type="hidden" name="title" th:value="${task.title}">
-			   
-			   <input type="checkbox"
-			          name="completed"
-					  value="true"
-					  th:checked="${task.completed}"
-					  onchange="this.form.submit()">
-					  
-			   <input type="hidden" name="completed" value="false">
-	  
-					
-			</form>  
-	       
-			
-			<!-- 削除フォーム -->
-			<form action="/tasks/delete" method="post">
-				
-				<input type="hidden" name="id" th:value="${task.id}">
-				<button type="submit">削除</button>
-				
-			</form>
-	    </li>
-	</ul>
+	<div class="container">
 
+		<h1 class="page-title">タスク一覧</h1>
+
+		<p th:if="${errorMessage}" th:text="${errorMessage}"></p>
+
+		<form action="/tasks" method="post" class="add-form">
+
+			<input type="text" name="title" placeholder="タスク名を入力">
+
+			<button type="submit">追加</button>
+
+		</form>
+
+		<ul class="task-list">
+			<li th:each="task : ${tasks}" class="task-item">
+
+				<div class="task-main">
+
+					<!--　完了チェックフォーム(チェックボックス) -->
+					<form action="/tasks/update" method="post">
+
+						<input type="hidden" name="id" th:value="${task.id}">
+
+						<input type="hidden" name="title" th:value="${task.title}">
+
+						<input type="checkbox" name="completed" value="true" th:checked="${task.completed}"
+							onchange="this.form.submit()">
+
+						<input type="hidden" name="completed" value="false">
+
+
+					</form>
+
+
+					<!-- タイトル更新フォーム　-->
+					<form action="/tasks/update" method="post" class="edit-form">
+
+						<input type="hidden" name="id" th:value="${task.id}">
+
+						<input type="text" name="title" th:value="${task.title}"
+							th:classappend="${task.completed} ? 'completed-task' : ''">
+						<input type="hidden" name="completed" th:value="${task.completed}">
+
+						<button type="submit" class="update-button">更新</button>
+
+					</form>
+
+				</div>
+
+				<!-- 削除フォーム -->
+				<form action="/tasks/delete" method="post" class="delete-form">
+
+					<input type="hidden" name="id" th:value="${task.id}">
+					<button type="submit" class="delete-button">削除</button>
+
+				</form>
+			</li>
+		</ul>
+	</div>
 </body>
+
 </html>
