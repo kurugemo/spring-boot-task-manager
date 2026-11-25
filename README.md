@@ -46,8 +46,15 @@ cd spring-boot-task-manager
 
 ### 3. アプリケーションを起動
 
+Windowsのコマンドプロンプトの場合：
+
 ```cmd
 mvnw.cmd spring-boot:run
+```
+Git Bashの場合：
+
+```bash
+./mvnw.cmd spring-boot:run
 ```
 
 ### 4. ブラウザでアクセス
