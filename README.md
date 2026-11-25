@@ -65,6 +65,14 @@ http://localhost:8080/tasks
 
 以下のコマンドでJUnitテストを実行できます。
 
+Windowsのコマンドプロンプトの場合：
+
 ```cmd
 mvnw.cmd test
+```
+
+Git Bashの場合：
+
+```bash
+./mvnw.cmd test
 ```
